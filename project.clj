@@ -3,7 +3,7 @@
   :url "https://github.com/skropf/evolved-joshua"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.9.0"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
                  [proto-repl "0.3.1"]
                  [clj-http "3.6.1"]
                  [environ "1.0.0"]
