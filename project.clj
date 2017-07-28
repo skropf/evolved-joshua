@@ -1,4 +1,4 @@
-(defproject evolved-joshua "0.1.0-alpha"
+(defproject evolved-joshua "0.1.0-beta"
   :description "Conversational bot which uses twitter as interface and Cleverbot as answering AI"
   :url "https://github.com/skropf/evolved-joshua"
   :license {:name "Eclipse Public License"
