@@ -9,6 +9,7 @@
                  [environ "1.0.0"]
                  [overtone/at-at "1.2.0"]
                  [twitter-api "0.7.8"]
+                 [org.clojure/data.json "0.2.6"]
                  [org.clojure/tools.logging "0.3.1"]
                  [org.slf4j/slf4j-log4j12 "1.7.12"]
                  [log4j/log4j "1.2.17"]]
