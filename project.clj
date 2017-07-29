@@ -8,6 +8,7 @@
                  [clj-http "3.6.1"]
                  [environ "1.0.0"]
                  [overtone/at-at "1.2.0"]
+                 [clj-time "0.14.0"]
                  [twitter-api "0.7.8"]
                  [org.clojure/data.json "0.2.6"]
                  [org.clojure/tools.logging "0.3.1"]
