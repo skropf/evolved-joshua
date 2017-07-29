@@ -21,7 +21,8 @@
 (def cleverbot-credentials (env :credentials-chatbot))
 
 (def botname "@josh_knoerzia")
-(def hashtag "#longtestingtagfornotfindinganythingelse") ;"#evolvedJoshua")
+(def hashtag "#longtestinghashtag") ;"#evolvedJoshua"
+(def hashtag-self-dialog "#selfDialogEvolvedJoshua")
 (def answer "answer") ;"I have evolved!!!")
 (def message (str "wohou answer answer found. ask me with " hashtag)) ;(str "I have evolved! The answer has been found. Ask me anything using " hashtag))
 
@@ -30,6 +31,9 @@
 (def answerFound (atom false))
 (def last-tweet-id (atom 0))
 (def user-map (atom {}))
+
+(def last-tweet-id-self-dialog (atom 0))
+(def last-tweet-text-self-dialog (atom (str "Hello. How are you? " hashtag-self-dialog)))
 
 
 (defn logging [text]
@@ -86,7 +90,7 @@
     (tweeting (str "@" (get-in tweet [:user :screen_name]) " " message) @last-tweet-id))
   (print-tweet-info tweet))
 
-;;TOIMPLEMENT
+;;
 (defn run-bot [tweet]
   (let [user (get-in tweet [:user :screen_name])
         question (str/replace (str/lower-case (get-in tweet [:text])) hashtag "")
@@ -107,10 +111,22 @@
         (if (= @answerFound true) (run-bot tweet) (check-answer tweet))))))
 
 ;;cleverbot talking with itself
-(defn self-dialog [])
-
-
+;;ALWAYS SENDS SAME TWEET -- FIX!!
+(defn self-dialog []
+  (logging "\n###SELF-DIALOG")
+  (let [tweet (first (get-tweets hashtag-self-dialog))]
+    (logging tweet)
+    (if (= tweet nil)
+      (tweeting @last-tweet-text-self-dialog)
+      (let [user (get-in tweet [:user :screen_name])
+            question (str/replace (str/lower-case (get-in tweet [:text])) hashtag-self-dialog "")
+            cs-old (get-in @user-map [(keyword user) :cs])
+            {:strs [cs clever_output]} (get-cleverbot-answer question cs-old)]
+        (swap! last-tweet-id-self-dialog (fn [x] (get-in tweet [:id])))
+        (print-info-running-bot user question cs-old cs clever_output)
+        (swap! user-map (fn [x] (update-in x [(keyword user) :cs] (fn [y] cs)))) ;update cs from user
+        (tweeting clever_output @last-tweet-id-self-dialog)))))
 
 (defn start []
-  (overtone/every 10000 #(parse-tweets) pool))
-  ;(overtone/every (* 1000 3600) #(self-dialog) pool)) ;every hour self-dialog
+  ;(overtone/every 10000 #(parse-tweets) pool)
+  (overtone/every (* 30000) #(self-dialog) pool)) ;every hour self-dialog
