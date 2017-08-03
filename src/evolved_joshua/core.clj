@@ -27,7 +27,7 @@
 (def pool (overtone/mk-pool))
 
 ; atoms
-(def answerFound (atom true))
+(def answerFound (atom false))
 (def last-tweet-id (atom 0))
 (def user-map (atom {}))
 
