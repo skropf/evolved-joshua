@@ -27,7 +27,7 @@
 (def pool (overtone/mk-pool))
 
 ; atoms
-(def answerFound (atom false))
+(def answerFound (atom true))
 (def last-tweet-id (atom 0))
 (def user-map (atom {}))
 
@@ -40,8 +40,8 @@
                     "\n          Answer:   " answer
                     "\n          Solved:   " @answerFound)))
 
-(defn log-info-running-bot [user question cs-old cs clever_ouput]
-  (logging/log (str "Tweet-ID: " @last-tweet-id
+(defn log-info-running-bot [tweet-id user question cs-old cs clever_ouput]
+  (logging/log (str "Tweet-ID: " tweet-id
                     "\n          Tweet:    " question
                     "\n          User:     " user
                     "\n          CS-old:   " cs-old
@@ -83,10 +83,12 @@
 ;;checks tweet for answer
 ;;if true tweets and switches to run-bot
 (defn check-answer [tweet]
-  (when (.contains (str/lower-case (get-in tweet [:text])) (str/lower-case answer))
-    (swap! answerFound (fn [x] true))
-    (tweeting (str "@" (get-in tweet [:user :screen_name]) " " message) @last-tweet-id))
-  (log-tweet-info tweet))
+  (let [text (get-in tweet [:text])
+        tweet-id (get-in tweet [:id])]
+    (when (.contains (str/lower-case text) (str/lower-case answer))
+      (swap! answerFound (fn [x] true))
+      (tweeting (str "@" (get-in tweet [:user :screen_name]) " " message) tweet-id))
+    (log-tweet-info tweet)))
 
 ;;
 (defn run-bot [tweet]
@@ -94,10 +96,11 @@
     (let [user (get-in tweet [:user :screen_name])
           question (str/replace (str/lower-case (get-in tweet [:text])) hashtag "")
           cs-old (get-in @user-map [(keyword user) :cs])
+          tweet-id (get-in tweet [:id])
           {:strs [cs clever_output]} (get-cleverbot-answer question cs-old)]
-      (log-info-running-bot user question cs-old cs clever_output)
+      (log-info-running-bot tweet-id user question cs-old cs clever_output)
       (swap! user-map (fn [x] (update-in x [(keyword user) :cs] (fn [y] cs)))) ;update cs from user
-      (tweeting clever_output @last-tweet-id))))
+      (tweeting clever_output tweet-id))))
 
 ;;parses through new tweets
 (defn parse-tweets []
@@ -106,7 +109,7 @@
     ;(logging (str tweets))
     (if (not (empty? tweets))
       (doseq [tweet tweets]
-        (swap! last-tweet-id (fn [x] (get-in tweet [:id]))) ;update most recent tweet-id
+        (swap! last-tweet-id (fn [old-id] (if (> old-id (get-in tweet [:id])) old-id (get-in tweet [:id])))) ;update most recent tweet-id
         (if (= @answerFound true) (run-bot tweet) (check-answer tweet))))))
 
 ;;cleverbot talking with itself

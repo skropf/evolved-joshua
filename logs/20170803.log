@@ -1,25 +1,29 @@
 
 
-[212054Z] PARSING
-[212114Z] PARSING
-[212134Z] PARSING
-[212134Z] Tweet-ID: 893220204779634689
-          Tweet:    final tests @josh_knoerzia
-          Answer:   I have evolved!!!
-          Solved:   false
-[212154Z] PARSING
-[212214Z] PARSING
-[212234Z] PARSING
-[212254Z] PARSING
-[212314Z] PARSING
-[212314Z] Tweet-ID: 893220606887514112
-          Tweet:    I have evolved!!! @josh_knoerzia
-          Answer:   I have evolved!!!
-          Solved:   false
-[212334Z] PARSING
-[212354Z] PARSING
-[212414Z] PARSING
-[212434Z] PARSING
-[212454Z] PARSING
-[212514Z] PARSING
-[212534Z] PARSING
+[213936Z] PARSING
+[213943Z] Tweet-ID: 893224160402472961
+          Tweet:    stranger things #evolvedjoshua
+          User:     josh_knoerzia
+          CS-old:   
+          CS:       MXYxCTh2MQlBdldYSkdQNUJaR08JMUZ2MTUwMTc5NjM4NAk2NHZzdHJhbmdlciB0aGluZ3MuCTY0aUxvbC4J
+          Answer:   Lol.
+[213943Z] TWEETED TO: 893224160402472961: 'Lol.'
+[213948Z] Tweet-ID: 893224129394073605
+          Tweet:    what day is it? #evolvedjoshua
+          User:     josh_knoerzia
+          CS-old:   MXYxCTh2MQlBdldYSkdQNUJaR08JMUZ2MTUwMTc5NjM4NAk2NHZzdHJhbmdlciB0aGluZ3MuCTY0aUxvbC4J
+          CS:       MXYxCTh2MQlBdldYQTUzNE9ZSkwJMUZ2MTUwMTc5NjM4NAk2NHZ3aGF0IGRheSBpcyBpdD8JNjRpVHVlc2RheS4J
+          Answer:   Tuesday.
+[213948Z] TWEETED TO: 893224129394073605: 'Tuesday.'
+[213949Z] Tweet-ID: 893224099929108480
+          Tweet:    how are you? #evolvedjoshua
+          User:     josh_knoerzia
+          CS-old:   MXYxCTh2MQlBdldYQTUzNE9ZSkwJMUZ2MTUwMTc5NjM4NAk2NHZ3aGF0IGRheSBpcyBpdD8JNjRpVHVlc2RheS4J
+          CS:       MXYxCTh2MQlBdldYR0QxVzdUUEkJMUZ2MTUwMTc5NjM4OQk2NHZob3cgYXJlIHlvdT8JNjRpRmluZSwgaG93IGFyZSB5b3U/CQ==
+          Answer:   Fine, how are you?
+[213950Z] TWEETED TO: 893224099929108480: 'Fine, how are you?'
+[213956Z] PARSING
+[214016Z] PARSING
+[214036Z] PARSING
+[214056Z] PARSING
+[214116Z] PARSING
