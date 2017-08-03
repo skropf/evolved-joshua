@@ -83,7 +83,7 @@
 ;;checks tweet for answer
 ;;if true tweets and switches to run-bot
 (defn check-answer [tweet]
-  (when (.contains (str/lower-case (get-in tweet [:text])) answer)
+  (when (.contains (str/lower-case (get-in tweet [:text])) (str/lower-case answer))
     (swap! answerFound (fn [x] true))
     (tweeting (str "@" (get-in tweet [:user :screen_name]) " " message) @last-tweet-id))
   (log-tweet-info tweet))
