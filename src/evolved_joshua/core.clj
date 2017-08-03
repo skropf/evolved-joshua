@@ -128,6 +128,6 @@
 ;       (swap! user-map (fn [x] (update-in x [(keyword user) :cs] (fn [y] cs)))) ;update cs from user
 ;       (tweeting @last-tweet-text-self-dialog @last-tweet-id-self-dialog)))))
 
-(defn start []
+(defn main []
   (overtone/every 20000 #(parse-tweets) pool)) ;every 30sec check if someone wrote #evolvedJoshua
   ;(overtone/every (* 60 60 1000) #(tweeting (get-chucknorris-joke)) pool)) ;every hour chuck norris joke
